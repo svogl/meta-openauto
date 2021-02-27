@@ -1,0 +1,60 @@
+Index: git/src/autoapp/UI/MainWindow.cpp
+===================================================================
+--- git.orig/src/autoapp/UI/MainWindow.cpp
++++ git/src/autoapp/UI/MainWindow.cpp
+@@ -597,7 +597,12 @@ void f1x::openauto::autoapp::ui::MainWin
+ 
+ void f1x::openauto::autoapp::ui::MainWindow::updateNetworkInfo()
+ {
+-    QNetworkInterface wlan0if = QNetworkInterface::interfaceFromName("wlan0");
++    char* wifi = "wlan0";
++    if (getenv("WIFI")) {
++	wifi = getenv("WIFI");
++    }
++  
++    QNetworkInterface wlan0if = QNetworkInterface::interfaceFromName(wifi);
+     if (wlan0if.flags().testFlag(QNetworkInterface::IsUp)) {
+         QList<QNetworkAddressEntry> entrieswlan0 = wlan0if.addressEntries();
+         if (!entrieswlan0.isEmpty()) {
+Index: git/src/autoapp/UI/SettingsWindow.cpp
+===================================================================
+--- git.orig/src/autoapp/UI/SettingsWindow.cpp
++++ git/src/autoapp/UI/SettingsWindow.cpp
+@@ -1339,8 +1339,11 @@ void f1x::openauto::autoapp::ui::Setting
+             //qDebug() << "eth0: down";
+             ui_->lineEdit_eth0->setText("interface down");
+         }
+-
+-        QNetworkInterface wlan0if = QNetworkInterface::interfaceFromName("wlan0");
++	char* wifi = "wlan0";
++	if (getenv("WIFI")) {
++	    wifi = getenv("WIFI");
++	}
++        QNetworkInterface wlan0if = QNetworkInterface::interfaceFromName(wifi);
+         if (wlan0if.flags().testFlag(QNetworkInterface::IsUp)) {
+             QList<QNetworkAddressEntry> entrieswlan0 = wlan0if.addressEntries();
+             if (!entrieswlan0.isEmpty()) {
+Index: git/src/btservice/AndroidBluetoothServer.cpp
+===================================================================
+--- git.orig/src/btservice/AndroidBluetoothServer.cpp
++++ git/src/btservice/AndroidBluetoothServer.cpp
+@@ -62,7 +62,11 @@ namespace f1x {
+ //                            QOverload<>::of(&ChatServer::clientDisconnected));
+ 
+                     f1x::aasdk::proto::messages::WifiInfoRequest request;
+-                    request.set_ip_address(getIP4_("wlan0"));
++		    char* wifi = "wlan0";
++		    if (getenv("WIFI")) {
++		      wifi = getenv("WIFI");
++		    }
++                    request.set_ip_address(getIP4_(wifi));
+                     request.set_port(5000);
+ 
+                     sendMessage(request, 1);
+@@ -184,4 +188,4 @@ namespace f1x {
+             }
+         }
+     }
+-}
+\ No newline at end of file
++}

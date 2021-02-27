@@ -1,0 +1,18 @@
+diff --git a/src/autoapp/UI/MainWindow.cpp b/src/autoapp/UI/MainWindow.cpp
+index 7a3166c..331e447 100644
+--- a/src/autoapp/UI/MainWindow.cpp
++++ b/src/autoapp/UI/MainWindow.cpp
+@@ -1260,8 +1260,13 @@ void f1x::openauto::autoapp::ui::MainWindow::on_mp3List_itemClicked(QListWidgetI
+ 
+ void f1x::openauto::autoapp::ui::MainWindow::metaDataChanged()
+ {
++#if QT_VERSION < QT_VERSION_CHECK(5,14,0)
++    QString fullpathplaying("video.mp4");
++    QString filename("video.mp4");
++#else
+     QString fullpathplaying = player->currentMedia().request().url().toString();
+     QString filename = QFileInfo(fullpathplaying).fileName();
++#endif
+ 
+     QImage img = player->metaData(QMediaMetaData::CoverArtImage).value<QImage>();
+     QImage imgscaled = img.scaled(270,270,Qt::IgnoreAspectRatio);

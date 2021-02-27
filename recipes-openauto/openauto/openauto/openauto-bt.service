@@ -1,0 +1,12 @@
+[Unit]
+Description=openauto integration - BT service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/openauto-bt.sh
+RestartSec=5
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

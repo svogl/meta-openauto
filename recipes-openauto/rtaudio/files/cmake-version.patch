@@ -1,0 +1,11 @@
+Index: rtaudio-5.1.0/CMakeLists.txt
+===================================================================
+--- rtaudio-5.1.0.orig/CMakeLists.txt
++++ rtaudio-5.1.0/CMakeLists.txt
+@@ -1,5 +1,5 @@
+ # Set minimum CMake required version for this project.
+-cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
++cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
+ 
+ # Define a C++ project.
+ project(RtAudio LANGUAGES CXX)

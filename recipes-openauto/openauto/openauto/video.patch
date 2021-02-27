@@ -1,0 +1,14 @@
+Index: openauto/CMakeLists.txt
+===================================================================
+--- openauto.orig/CMakeLists.txt
++++ openauto/CMakeLists.txt
+@@ -25,6 +25,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_I
+ set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
+ set(CMAKE_CXX_FLAGS_RELEASE "-g -O3")
+ 
++set(AASDK_PROTO_LIBRARIES "aasdk_proto")
++set(AASDK_LIBRARIES "aasdk")
++
+ add_definitions(-DBOOST_ALL_DYN_LINK)
+ 
+ find_package(Boost REQUIRED COMPONENTS system log OPTIONAL_COMPONENTS unit_test_framework)

@@ -1,0 +1,12 @@
+[Unit]
+Description=openauto integration - UI
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/openauto-ui.sh
+RestartSec=5
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
